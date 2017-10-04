@@ -1,4 +1,3 @@
 jwt
 click
-getpass
 cryptography
