@@ -7,6 +7,7 @@ do-build:
 	python setup.py build
 
 push:
+	rm -rf dist/*
 	python setup.py sdist
 	twine upload dist/*
 
