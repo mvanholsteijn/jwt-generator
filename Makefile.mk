@@ -81,13 +81,13 @@ showver: .release
 	@. $(RELEASE_SUPPORT); getVersion
 
 tag-patch-release: VERSION := $(shell . $(RELEASE_SUPPORT); nextPatchLevel)
-tag-patch-release: .release tag tag 
+tag-patch-release: .release tag 
 
 tag-minor-release: VERSION := $(shell . $(RELEASE_SUPPORT); nextMinorLevel)
-tag-minor-release: .release tag tag 
+tag-minor-release: .release tag 
 
 tag-major-release: VERSION := $(shell . $(RELEASE_SUPPORT); nextMajorLevel)
-tag-major-release: .release tag tag 
+tag-major-release: .release tag 
 
 patch-release: tag-patch-release release
 	@echo $(VERSION)
