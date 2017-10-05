@@ -24,7 +24,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     platforms='any',
-    install_requires=dependencies,
+    install_requires=['jwt', 'click'],
     author = "Mark van Holsteijn",
     author_email = "markvanholsteijn@binx.io",
     url = "https://github.com/mvanholsteijn/jwt-generator",
