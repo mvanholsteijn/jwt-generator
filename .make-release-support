@@ -51,7 +51,7 @@ function runPreTagCommand() {
 	if [ -n "$1" ] ; then
 		COMMAND=$(sed -n -e "s/@@RELEASE@@/$1/g" -e 's/^pre_tag_command=\(.*\)/\1/p' .release)
 		if [ -n "$COMMAND" ] ; then
-			OUTPUT=$(eval "$COMMAND" 2>&1) || echo $OUTPUT >&2 && exit 1
+			if ! OUTPUT=$(bash -c "$COMMAND" 2>&1) ; then echo $OUTPUT >&2 && exit 1 ; fi
 		fi
 	else
 		echo "ERROR: missing release version parameter " >&2
