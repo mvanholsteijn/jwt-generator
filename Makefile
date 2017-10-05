@@ -11,11 +11,8 @@ push:
 	twine upload dist/*
 
 clean:
-	rm -rf build/* 
 	python setup.py clean
-
-clobber: clean
-	rm -rf dist/* 
+	rm -rf build/* dist/*
 
 install:
 	python setup.py install
