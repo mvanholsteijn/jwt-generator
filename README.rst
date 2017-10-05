@@ -24,3 +24,12 @@ To send the the authorization bearer token with curl, type::
 
 	curl -H "$(jwt-generator -A)" https://httpbin.org/headers
 
+**Install on MacOS**
+
+To install you MacOs you might run into trouble due to the dependency on cryptography. Type:::
+
+	export LDFLAGS="-L/usr/local/opt/openssl/lib"
+	export CPPFLAGS="-I/usr/local/opt/openssl/include"
+	export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
+
+before you do the `pip install jwt-generator`. See https://github.com/pyca/cryptography/issues/2692 for details.
