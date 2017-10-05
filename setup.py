@@ -24,7 +24,7 @@ setup(
     description = "unix command line JWT generator.",
     long_description=long_description,
     include_package_data=True,
-    zip_safe=True,
+    zip_safe=False,
     platforms='any',
     install_requires=['jwt', 'click'],
     author = "Mark van Holsteijn",
