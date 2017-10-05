@@ -40,6 +40,19 @@ function setRelease() {
 		sed -i.x -e "s/tag=.*/tag=$(getTag $1)/" .release
 		sed -i.x -e "s/release=.*/release=$1/g" .release
 		rm -f .release.x
+		runPreTagCommand "$1"
+	else
+		echo "ERROR: missing release version parameter " >&2
+		return 1
+	fi
+}
+
+function runPreTagCommand() {
+	if [ -n "$1" ] ; then
+		COMMAND=$(sed -n -e "s/@@RELEASE@@/$1/g" -e 's/^pre_tag_command=\(.*\)/\1/p' .release)
+		if [ -n $COMMAND ] ; then
+			eval $COMMAND
+		fi
 	else
 		echo "ERROR: missing release version parameter " >&2
 		return 1
