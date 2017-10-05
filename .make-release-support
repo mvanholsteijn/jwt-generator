@@ -48,7 +48,6 @@ function setRelease() {
 }
 
 function runPreTagCommand() {
-	set -x
 	if [ -n "$1" ] ; then
 		COMMAND=$(sed -n -e "s/@@RELEASE@@/$1/g" -e 's/^pre_tag_command=\(.*\)/\1/p' .release)
 		if [ -n "$COMMAND" ] ; then
