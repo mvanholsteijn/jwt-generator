@@ -20,16 +20,16 @@ function hasChanges() {
 }
 
 function getRelease() {
-	awk -F= '/release/{print $2}' .release
+	awk -F= '/^release=/{print $2}' .release
 }
 
 function getBaseTag() {
-		sed -n -e "s/tag=\(.*\)$(getRelease)\$/\1/p" .release
+		sed -n -e "s/^tag=\(.*\)$(getRelease)\$/\1/p" .release
 }
 
 function getTag() {
 	if [ -z "$1" ] ; then
-		awk -F= '/tag/{print $2}' .release
+		awk -F= '/^tag/{print $2}' .release
 	else
 		echo "$(getBaseTag)$1"
 	fi
@@ -37,8 +37,8 @@ function getTag() {
 
 function setRelease() {
 	if [ -n "$1" ] ; then
-		sed -i.x -e "s/tag=.*/tag=$(getTag $1)/" .release
-		sed -i.x -e "s/release=.*/release=$1/g" .release
+		sed -i.x -e "s/^tag=.*/tag=$(getTag $1)/" .release
+		sed -i.x -e "s/^release=.*/release=$1/g" .release
 		rm -f .release.x
 		runPreTagCommand "$1"
 	else
@@ -52,7 +52,7 @@ function runPreTagCommand() {
 	if [ -n "$1" ] ; then
 		COMMAND=$(sed -n -e "s/@@RELEASE@@/$1/g" -e 's/^pre_tag_command=\(.*\)/\1/p' .release)
 		if [ -n "$COMMAND" ] ; then
-			eval "$COMMAND"
+			OUTPUT=$(eval "$COMMAND" 2>&1) || echo $OUTPUT >&2 && exit 1
 		fi
 	else
 		echo "ERROR: missing release version parameter " >&2
