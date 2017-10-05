@@ -5,8 +5,8 @@ NAME=jwt-generator
 do-build:
 	python setup.py check
 	python setup.py build
-	
-deploy:
+
+push:
 	python setup.py sdist
 	twine upload dist/*
 
