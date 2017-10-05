@@ -11,6 +11,3 @@ clean:
 
 install:
 	python setup.py install
-
-pre-tag:
-	sed -e "s/^version=.*/version='$(VERSION)'/" -i "" setup.py
