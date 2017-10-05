@@ -9,7 +9,6 @@ from setuptools import setup
 from os import path
 
 here = path.abspath(path.dirname(__file__))
-dependencies = open(path.join(here, 'requirements.txt'),'r').readlines()
 with open(path.join(here, 'README.rst'), 'r') as f:
     long_description = f.read()
 
