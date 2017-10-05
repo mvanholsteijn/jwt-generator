@@ -6,11 +6,16 @@
 
 import re
 from setuptools import setup
+from git_release_tag import GitReleaseTagger
 
 dependencies = open('requirements.txt','r').readlines()
 
 
-version="0.0.0"
+tagger = GitReleaseTagger()
+tagger.set_directory('.')
+tagger.get_current_release()
+
+version=tagger.current_release
 
 setup(
     name = "jwt-generator",

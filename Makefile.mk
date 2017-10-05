@@ -81,7 +81,7 @@ showver: .release
 	@. $(RELEASE_SUPPORT); getVersion
 
 tag-patch-release: VERSION := $(shell . $(RELEASE_SUPPORT); nextPatchLevel)
-tag-patch-release: .release pre-tag tag 
+tag-patch-release: .release tag tag 
 
 tag-minor-release: VERSION := $(shell . $(RELEASE_SUPPORT); nextMinorLevel)
 tag-minor-release: .release pre-tag tag 
@@ -103,6 +103,7 @@ tag: TAG=$(shell . $(RELEASE_SUPPORT); getTag $(VERSION))
 tag: check-status
 	@. $(RELEASE_SUPPORT) ; ! tagExists $(TAG) || (echo "ERROR: tag $(TAG) for version $(VERSION) already tagged in git" >&2 && exit 1) ;
 	@. $(RELEASE_SUPPORT) ; setRelease $(VERSION)
+	$(MAKE) pre-tag
 	git add .release
 	git commit -m "bumped to version $(VERSION)" ;
 	git tag $(TAG) ;

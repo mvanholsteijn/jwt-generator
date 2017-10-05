@@ -14,4 +14,3 @@ install:
 
 pre-tag:
 	sed -e "s/^version=.*/version='$(VERSION)'/" -i "" setup.py
-	git add setup.py
