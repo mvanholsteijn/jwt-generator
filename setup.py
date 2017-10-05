@@ -13,7 +13,7 @@ dependencies = open(path.join(here, 'requirements.txt'),'r').readlines()
 with open(path.join(here, 'README.rst'), 'r') as f:
     long_description = f.read()
 
-version="0.2.0"
+version="0.3.0"
 
 setup(
     name = "jwt-generator",
