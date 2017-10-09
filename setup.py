@@ -16,9 +16,9 @@ version="0.7.0"
 
 setup(
     name = "jwt-generator",
-    packages = ["generator"],
+    packages = ["jwt_generator"],
     entry_points = {
-        "console_scripts": ['jwt-generator = generator.jwt_generator:main']
+        "console_scripts": ['jwt-generator = jwt_generator.jwt_generator:main']
         },
     version = version,
     description = "unix command line JWT generator.",
