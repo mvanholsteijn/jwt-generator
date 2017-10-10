@@ -1,3 +1,1 @@
-import jwt_generator
-
-JWTGenerator = jwt_generator.JWTGenerator
+from jwt_generator import JWTGenerator

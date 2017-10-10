@@ -26,7 +26,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     platforms='any',
-    install_requires=['jwt', 'click'],
+    install_requires=['pyjwt', 'click', 'cryptography'],
     author = "Mark van Holsteijn",
     author_email = "mvanholsteijn@xebia.com",
     url = "https://github.com/mvanholsteijn/jwt-generator",
