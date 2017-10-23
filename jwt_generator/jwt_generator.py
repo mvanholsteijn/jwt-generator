@@ -26,7 +26,15 @@ class JWTGenerator(object):
     def load_private_key(self, private_key_file):
         with open(private_key_file, 'rb') as fh:
             pem_data = fh.read()
-            self.key = load_pem_private_key(pem_data, password=None, backend=default_backend())
+            self.set_private_key(pem_data)
+
+    def set_private_key(self, pem_data):
+        self.key = load_pem_private_key(
+            pem_data, password=None, backend=default_backend())
+
+    def refresh_token(self):
+        self.now = int(time.mktime(datetime.now().timetuple()))
+        self.generate()
 
     def generate(self):
         message = {
@@ -49,9 +57,7 @@ class JWTGenerator(object):
               type=click.INT,
               default=60,
               help='number of seconds before now the token is no longer valid')
-@click.option('--expires-after',
-              type=click.INT,
-              default=1800,
+@click.option('--expires-after', type=click.INT, default=1800,
               help='number of seconds after which the token is no longer valid')
 @click.option('--private-key-file',
               type=click.Path(exists=True, file_okay=True),
@@ -60,7 +66,9 @@ class JWTGenerator(object):
 @click.option('--authorization-header', '-A',
               is_flag=True, default=False,
               help='print authorization header bearer token')
-def main(issuer, not_before, expires_after, private_key_file, authorization_header):
+def main(
+        issuer, not_before, expires_after, private_key_file,
+        authorization_header):
     generator = JWTGenerator()
     generator.issuer = issuer
     generator.not_before = not_before
