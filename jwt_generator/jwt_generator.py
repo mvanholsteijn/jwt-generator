@@ -32,6 +32,10 @@ class JWTGenerator(object):
         self.key = load_pem_private_key(
             pem_data, password=None, backend=default_backend())
 
+    def has_expired(self, margin_in_seconds=30):
+        now = int(time.mktime(datetime.now().timetuple()))
+        return (self.now + self.expires_after - margin_in_seconds) < now
+
     def refresh_token(self):
         self.now = int(time.mktime(datetime.now().timetuple()))
         self.generate()
