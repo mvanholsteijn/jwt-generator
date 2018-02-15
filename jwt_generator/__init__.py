@@ -1,1 +1,1 @@
-from jwt_generator import JWTGenerator
+from .jwt_generator import JWTGenerator
